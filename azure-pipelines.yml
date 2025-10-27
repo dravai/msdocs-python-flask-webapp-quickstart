@@ -23,6 +23,7 @@ variables:
   projectRoot: $(System.DefaultWorkingDirectory)
 
   pythonVersion: '3.10'
+  resourceGroup: 'dm050'
 
 stages:
 - stage: Build
@@ -58,6 +59,25 @@ stages:
     - upload: $(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip
       displayName: 'Upload package'
       artifact: drop
+
+- stage: ConfigureAppSettings
+  displayName: 'Configure application'
+  jobs:
+  - job: SetAppSettings
+    pool:
+      vmImage: $(vmImageName)
+    steps:
+    - task: AzureCLI@2
+      displayName: 'Set App Service app settings'
+      inputs:
+        azureSubscription: $(azureServiceConnectionId)
+        scriptType: bash
+        scriptLocation: inlineScript
+        inlineScript: |
+          az webapp config apsettings set \
+            --name "$(webAppName)" \
+            --resource-group "$(resourceGroup)" \
+            --settings "SCM_DO_BUILD_DURING_DEPLOYMENT=true"
 
 - stage: Deploy
   displayName: 'Deploy Web App'
