@@ -43,10 +43,14 @@ stages:
     - script: |
         python -m venv antenv
         source antenv/bin/activate
-        cat requirements.txt
-        pip install -r requirements.txt
       workingDirectory: $(projectRoot)
       displayName: "Install requirements"
+
+    - script: |
+        pip install -r requirements.txt
+      workingDirectory: $(projectRoot)
+      displayName: "Install requirements 2"
+
 
     - task: ArchiveFiles@2
       displayName: 'Archive files'
