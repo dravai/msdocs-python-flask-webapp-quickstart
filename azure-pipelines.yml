@@ -25,6 +25,8 @@ variables:
   pythonVersion: '3.10'
   resourceGroup: 'dm050'
 
+  system.debug: true
+
 stages:
 - stage: Build
   displayName: Build stage
