@@ -74,7 +74,7 @@ stages:
         scriptType: bash
         scriptLocation: inlineScript
         inlineScript: |
-          az webapp config apsettings set \
+          az webapp config appsettings set \
             --name "$(webAppName)" \
             --resource-group "$(resourceGroup)" \
             --settings "SCM_DO_BUILD_DURING_DEPLOYMENT=true"
