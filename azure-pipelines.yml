@@ -43,7 +43,7 @@ stages:
     - script: |
         python -m venv antenv
         source antenv/bin/activate
-        python -m pip install --upgrade pip
+        cat requirements.txt
         pip install -r requirements.txt
       workingDirectory: $(projectRoot)
       displayName: "Install requirements"
