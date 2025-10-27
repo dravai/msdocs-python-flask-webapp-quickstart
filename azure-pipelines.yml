@@ -62,13 +62,6 @@ stages:
       displayName: 'Upload package'
       artifact: drop
 
-- stage: ConfigureAppSettings
-  displayName: 'Configure application'
-  jobs:
-  - job: SetAppSettings
-    pool:
-      vmImage: $(vmImageName)
-    steps:
     - task: AzureCLI@2
       displayName: 'Set App Service app settings'
       inputs:
